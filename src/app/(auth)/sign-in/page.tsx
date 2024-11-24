@@ -1,9 +1,9 @@
-import React from 'react'
+'use client';
 
-function page() {
+function LoginPage() {
   return (
     <div>page</div>
   )
 }
 
-export default page
+export default LoginPage
