@@ -13,9 +13,9 @@ function Navbar() {
     return (
         <nav className='p-4 md:p-6 bg-gray-500 text-white'>
             <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-                <a href="#">
+                <Link href="/">
                     Mystery Message
-                </a>
+                </Link>
                 {
                     session ? (
                         <>
