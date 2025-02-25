@@ -12,26 +12,23 @@ export async function POST(req: NextRequest) {
     focusing instead on universal themes that encourage friendly interaction. 
     Ensure the questions are intriguing, foster curiosity, and contribute to a positive and welcoming conversational environment.`;
 
-    const model = google('gemini-1.5-pro-latest', {
-      safetySettings: [
-        { category: 'HARM_CATEGORY_UNSPECIFIED', threshold: 'BLOCK_LOW_AND_ABOVE' },
-      ],
-    });
+    const model = google('models/gemini-1.5-pro-latest');
 
     const response = streamText({
       model,
       prompt,
       maxTokens: 400,
     });
-
+    
     let fullResponse = '';
     for await (const chunk of response.textStream) {
       fullResponse += chunk;
     }
 
     return NextResponse.json({ 'question': fullResponse }, { status: 200 });
+    // return response.toDataStreamResponse();
   } catch (error) {
     console.error('An unexpected error occurred:', error);
-    throw error;
+    return NextResponse.json({ message :`Failed to fetch suggested message.` }, { status: 500 });
   }
 } 
