@@ -61,7 +61,7 @@ export async function GET(req: Request) {
     const userId = user._id;
 
     try {
-        const user = await UserModel.findById({userId});
+        const user = await UserModel.findById(userId);
         if(!user) {
             return Response.json({
                 success: false,
