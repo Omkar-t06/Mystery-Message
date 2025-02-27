@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import React, { use, useState } from 'react'
+import React, { useState } from 'react'
 import { useCompletion } from '@ai-sdk/react'
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -27,15 +27,15 @@ const initialMessageString =
 function SendMessage() {
     const { username } = useParams<{ username: string }>();
 
-    // const {
-    //     complete,
-    //     completion,
-    //     isLoading: isSuggestingMessages,
-    //     error,
-    // } = useCompletion({
-    //     api: '/api/suggest-messages',
-    //     initialCompletion: initialMessageString,
-    // });
+    const {
+        complete,
+        completion,
+        isLoading: isSuggestingMessages,
+        error,
+    } = useCompletion({
+        api: '/api/suggest-messages',
+        initialCompletion: initialMessageString,
+    });
 
     // console.log(completion)
     // console.log(error)
@@ -49,9 +49,9 @@ function SendMessage() {
     const handleMessageClick = (message: string) => form.setValue("content", message);
 
     const [isLoading, setIsLoading] = useState(false);
-    const [isSuggestingMessages, setIsSuggestingMessage] = useState(false);
-    const [suggestingMessageError, setSuggestingMessageError] = useState<Error | null>(null);
-    const [messageString, setMessageString] = useState(initialMessageString);
+    // const [isSuggestingMessages, setIsSuggestingMessage] = useState(false);
+    // const [suggestingMessageError, setSuggestingMessageError] = useState<Error | null>(null);
+    // const [messageString, setMessageString] = useState(initialMessageString);
 
     const { toast } = useToast();
 
@@ -79,18 +79,27 @@ function SendMessage() {
     }
 
     const fetchSuggestedMessages = async () => {
-        setIsSuggestingMessage(true);
+        // setIsSuggestingMessage(true);
+        // try {
+        //     const res = await axios.post('/api/suggest-messages');
+        //     if(!res.data.question){
+        //         throw Error("Invalid API response.")
+        //     }            
+        //     setMessageString(res.data.question)
+        // } catch (error) {
+        //     console.log(error);
+        //     setSuggestingMessageError(error as Error)
+        // } finally {
+        //     // setIsSuggestingMessage(false)
+        // }
         try {
-            const res = await axios.post('/api/suggest-messages');
-            if(!res.data.question){
-                throw Error("Invalid API response.")
-            }            
-            setMessageString(res.data.question)
-        } catch (error) {
-            console.log(error);
-            setSuggestingMessageError(error as Error)
-        } finally {
-            setIsSuggestingMessage(false)
+            complete('');
+        } catch (e) {
+            toast({
+                title: "Error.",
+                description: "Failed to fetch suggested messages.",
+                variant: 'destructive',
+            })
         }
     }
      
@@ -151,16 +160,16 @@ function SendMessage() {
                     </CardHeader>
                     <CardContent className='flex flex-col space-y-4'>
                         {
-                            suggestingMessageError ? (
+                            error ? (
                                 <p className='bg-red-400 rounded p-2 '>
-                                    {suggestingMessageError.message}
+                                    {error.message}
                                 </p>
                             ) : (
-                                parseStringMessages(messageString).map((message, index) => (
+                                parseStringMessages(completion).map((message, index) => (
                                     <Button
                                         key={index}
                                         variant={'outline'}
-                                        className='mb-2'
+                                        className='mb-2 transition-transform duration-500 ease-in-out transform hover:scale-105 focus:scale-100'
                                         onClick={() => handleMessageClick(message)}
                                     >
                                         {message}

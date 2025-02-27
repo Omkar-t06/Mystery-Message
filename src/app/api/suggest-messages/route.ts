@@ -20,13 +20,13 @@ export async function POST(req: NextRequest) {
       maxTokens: 400,
     });
     
-    let fullResponse = '';
-    for await (const chunk of response.textStream) {
-      fullResponse += chunk;
-    }
+    // let fullResponse = '';
+    // for await (const chunk of response.textStream) {
+    //   fullResponse += chunk;
+    // }
 
-    return NextResponse.json({ 'question': fullResponse }, { status: 200 });
-    // return response.toDataStreamResponse();
+    // return NextResponse.json({ 'question': fullResponse }, { status: 200 });
+    return response.toDataStreamResponse();
   } catch (error) {
     console.error('An unexpected error occurred:', error);
     return NextResponse.json({ message :`Failed to fetch suggested message.` }, { status: 500 });
