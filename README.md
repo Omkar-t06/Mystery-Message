@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mystery-Message
 
-## Getting Started
+Mystery-Message is an anonymous messaging platform built using **Next.js**, **MongoDB**, **Tailwind CSS**, and **ShadCN**. It allows users to send and receive anonymous messages, with AI-powered message suggestions using **Vercel AI SDK** and **Gemini API**.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Anonymous Messaging: Users can send and receive messages without revealing their identity.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- AI-Powered Suggestions: Uses Vercel AI SDK and Gemini API to suggest messages.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Modern UI: Styled with Tailwind CSS and ShadCN for a sleek, user-friendly interface.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- MongoDB Database: Stores messages securely with efficient querying.
 
-## Learn More
+- Authentication: Uses NextAuth for secure user authentication.
 
-To learn more about Next.js, take a look at the following resources:
+- Serverless Deployment: Optimized for Vercel.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Framework: Next.js
 
-## Deploy on Vercel
+- Database: MongoDB
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Styling: Tailwind CSS, ShadCN
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- AI Integration: Vercel AI SDK, Gemini API
+
+## Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/Omkar-t06/Mystery-Message.git
+    cd mystery-message
+    ```
+
+1. Install dependencies:
+    ```
+    npm install
+    ```
+1. Set up environment variables in a .env.local file:
+    ```
+    MONGODB_URI=your-mongodb-uri
+    NEXTAUTH_SECRET=your-secret
+    RESEND_API_KEY=your-api-key
+    GOOGLE_GENERATIVE_AI_API_KEY=your-gemini-api-key
+    ```
+
+1. Run the development server:
+    ```
+    npm run dev
+    ```
+
+1. Open http://localhost:3000 in your browser.
+
+## Deployment
+
+This project is optimized for deployment on **Vercel**. To deploy:
+
+1. Push the repository to GitHub.
+
+2. Connect the repo to Vercel and set environment variables.
+
+3. Deploy the project with a single click.
+
+## Credits
+
+This project was built following and completing assignments from a tutorial by Chai aur Code. You can check out the tutorial series here:
+[YouTube Playlist: Chai aur full stack NextJS](https://youtube.com/playlist?list=PLu71SKxNbfoBAaWGtn9GA2PTw0HO0tXzq&si=xPJSg1yJTUB12uXk)
+
+Feel free to contribute, suggest features, or report issues. Happy coding! 🚀
